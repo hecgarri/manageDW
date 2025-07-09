@@ -15,4 +15,7 @@ Imports:
     dplyr,
     glue,
     purrr,
-    RPostgres
+    RPostgres,
+    data.table,
+    stringr,
+    here

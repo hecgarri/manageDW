@@ -1,2 +1,3 @@
 ^manageDW\.Rproj$
 ^\.Rproj\.user$
+^.env

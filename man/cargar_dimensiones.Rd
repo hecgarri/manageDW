@@ -9,13 +9,13 @@ cargar_dimensiones(dt, con, file_name = NULL)
 \arguments{
 \item{dt}{data.table resultante de leer_txt_sii()}
 
-\item{con}{Conexión DBI (PostgreSQL)}
+\item{con}{Conexion DBI (PostgreSQL)}
 
-\item{file_name}{Nombre del archivo (se usa sólo para mensajes)}
+\item{file_name}{Nombre del archivo (se usa solo para mensajes)}
 }
 \description{
-La función detecta en tiempo de ejecución si existen las
-columnas mínimas para cada dimensión.
-• Si faltan, muestra \code{message()} y omite la carga.
-• En dim_tiempo desecha filas con \code{NA} en \code{Anio}.
+La funcion detecta en tiempo de ejecucion si existen las
+columnas minimas para cada dimension.
+. Si faltan, muestra \code{message()} y omite la carga.
+. En dim_tiempo desecha filas con \code{NA} en \code{Anio}.
 }

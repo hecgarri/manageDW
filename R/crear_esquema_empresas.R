@@ -1,8 +1,8 @@
 #' Crea y documenta la estructura del Data Warehouse
 #'
-#' Imprime si cada tabla fue creada o ya existía.
+#' Imprime si cada tabla fue creada o ya existia.
 #'
-#' @param con    Conexión DBI (RPostgres) con permisos DDL
+#' @param con    Conexion DBI (RPostgres) con permisos DDL
 #' @param schema Esquema destino; por defecto "public"
 #' @export
 crear_esquema_empresas <- function(con, schema = "public") {
@@ -12,11 +12,11 @@ crear_esquema_empresas <- function(con, schema = "public") {
     tbl_id  <- DBI::Id(schema = schema, table = nombre)
     existed <- dbExistsTable(con, tbl_id)
 
-    # inmediato = TRUE → se envía como comando sin preparar (permite múltiples órdenes)
+    # inmediato = TRUE ? se envia como comando sin preparar (permite multiples ordenes)
     dbExecute(con, ddl, immediate = TRUE)
 
-    msg <- if (existed) "ya existía" else "creada"
-    message(sprintf("• Tabla %-10s %s en esquema «%s».", nombre, msg, schema))
+    msg <- if (existed) "ya existia" else "creada"
+    message(sprintf(". Tabla %-10s %s en esquema <%s>.", nombre, msg, schema))
   }
 
   asegurar_tabla("dim_geo", sprintf("
@@ -30,7 +30,7 @@ crear_esquema_empresas <- function(con, schema = "public") {
       UNIQUE (CodRegion, CodProvincia, CodComuna)
     );
     COMMENT ON TABLE  %s.dim_geo IS
-      'Dimensión geográfica jerárquica (Región → Provincia → Comuna).';
+      'Dimension geografica jerarquica (Region ? Provincia ? Comuna).';
     COMMENT ON COLUMN %s.dim_geo.NivelGeo IS
       'Nivel de agregado: REGION | PROVINCIA | COMUNA';
   ", schema, schema, schema))
@@ -43,7 +43,7 @@ crear_esquema_empresas <- function(con, schema = "public") {
       Actividad TEXT
     );
     COMMENT ON TABLE %s.dim_act IS
-      'Dimensión de actividad económica (Rubro, Sub-rubro, Actividad).';
+      'Dimension de actividad economica (Rubro, Sub-rubro, Actividad).';
   ", schema, schema))
 
   asegurar_tabla("dim_tramo", sprintf("
@@ -52,7 +52,7 @@ crear_esquema_empresas <- function(con, schema = "public") {
       Descripcion TEXT
     );
     COMMENT ON TABLE %s.dim_tramo IS
-      'Dimensión de tramo de ventas / tamaño de empresa (SII).';
+      'Dimension de tramo de ventas / tamano de empresa (SII).';
   ", schema, schema))
 
   asegurar_tabla("dim_tiempo", sprintf("
@@ -60,7 +60,7 @@ crear_esquema_empresas <- function(con, schema = "public") {
       Anio INT PRIMARY KEY
     );
     COMMENT ON TABLE %s.dim_tiempo IS
-      'Dimensión temporal anual.';
+      'Dimension temporal anual.';
   ", schema, schema))
 
   asegurar_tabla("f_empresas", sprintf("
@@ -76,8 +76,8 @@ crear_esquema_empresas <- function(con, schema = "public") {
       PRIMARY KEY (IDGeo, IDAct, IDTramo, Anio)
     );
     COMMENT ON TABLE %s.f_empresas IS
-      'Tabla de hechos: métricas anuales por geografía, actividad y tramo.';
-    COMMENT ON COLUMN %s.f_empresas.NumEmpresas     IS 'Número de empresas.';
+      'Tabla de hechos: metricas anuales por geografia, actividad y tramo.';
+    COMMENT ON COLUMN %s.f_empresas.NumEmpresas     IS 'Numero de empresas.';
     COMMENT ON COLUMN %s.f_empresas.MontoVentas     IS 'Ventas anuales (CLP).';
     COMMENT ON COLUMN %s.f_empresas.Trabajadores    IS 'Trabajadores declarados.';
     COMMENT ON COLUMN %s.f_empresas.Remuneraciones  IS 'Remuneraciones anuales (CLP).';

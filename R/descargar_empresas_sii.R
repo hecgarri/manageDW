@@ -10,7 +10,7 @@ descargar_empresas_sii <- function(dir = here::here("data-raw/sii")) {
 
   if (length(existentes) > 0L) {
     message(sprintf(
-      "Se omitió la descarga: %d archivos ya presentes en '%s'.",
+      "Se omitio la descarga: %d archivos ya presentes en '%s'.",
       length(existentes), dir
     ))
     return(existentes)

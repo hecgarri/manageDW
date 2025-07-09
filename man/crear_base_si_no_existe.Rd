@@ -8,6 +8,8 @@ crear_base_si_no_existe(nombre_bd, env_path = NULL)
 }
 \arguments{
 \item{nombre_bd}{Nombre de la base de datos a crear}
+
+\item{env_path}{ruta al archivo .env}
 }
 \description{
 Crear base de datos si no existe (usando .env)

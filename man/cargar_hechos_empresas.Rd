@@ -12,7 +12,7 @@ CodRegion, CodProvincia, CodComuna, TramoVentas,
 CodRubro, Anio, NumeroEmpresas, MontoVentas,
 Trabajadores, Remuneraciones}
 
-\item{con}{Conexión DBI (PostgreSQL)}
+\item{con}{Conexion DBI (PostgreSQL)}
 }
 \description{
 Inserta o actualiza la tabla de hechos f_empresas (vectorizado)

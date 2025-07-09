@@ -7,10 +7,10 @@
 crear_esquema_empresas(con, schema = "public")
 }
 \arguments{
-\item{con}{Conexión DBI (RPostgres) con permisos DDL}
+\item{con}{Conexion DBI (RPostgres) con permisos DDL}
 
 \item{schema}{Esquema destino; por defecto "public"}
 }
 \description{
-Imprime si cada tabla fue creada o ya existía.
+Imprime si cada tabla fue creada o ya existia.
 }

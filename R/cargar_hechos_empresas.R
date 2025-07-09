@@ -4,18 +4,18 @@
 #'            CodRegion, CodProvincia, CodComuna, TramoVentas,
 #'            CodRubro, Anio, NumeroEmpresas, MontoVentas,
 #'            Trabajadores, Remuneraciones
-#' @param con Conexión DBI (PostgreSQL)
+#' @param con Conexion DBI (PostgreSQL)
 #' @export
 cargar_hechos_empresas <- function(dt, con) {
   library(data.table); setDT(dt)                         # garantiza data.table
 
-  ## ───── 1. Enlace de claves surrogate ─────────────────────────────────────
+  ## ????? 1. Enlace de claves surrogate ?????????????????????????????????????
   geo_map <- dbGetQuery(con,
                         "SELECT idgeo, codregion, codprovincia, codcomuna FROM dim_geo;"
   )
   setDT(geo_map)
 
-  # join in-place para añadir IDGeo
+  # join in-place para anadir IDGeo
   dt <- geo_map[dt,
                 on = .(codregion = CodRegion,
                        codprovincia = CodProvincia,
@@ -23,7 +23,7 @@ cargar_hechos_empresas <- function(dt, con) {
 
   dt[, IDTramo := TramoVentas]
 
-  ## ───── 2. Selección y renombre de columnas ───────────────────────────────
+  ## ????? 2. Seleccion y renombre de columnas ???????????????????????????????
   hechos <- dt[, .(
     idgeo,
     idact          = CodRubro,
@@ -35,7 +35,7 @@ cargar_hechos_empresas <- function(dt, con) {
     remuneraciones = Remuneraciones
   )]
 
-  ## ───── 3. Upsert masivo en una sola transacción ──────────────────────────
+  ## ????? 3. Upsert masivo en una sola transaccion ??????????????????????????
   dbWithTransaction(con, {
     # 3.1 copiar a tabla temporal
     dbWriteTable(con,
@@ -54,6 +54,6 @@ cargar_hechos_empresas <- function(dt, con) {
         trabajadores   = EXCLUDED.trabajadores,
         remuneraciones = EXCLUDED.remuneraciones;
     ", immediate = TRUE)
-    message(sprintf("• f_empresas: %d filas insertadas/actualizadas.", n))
+    message(sprintf(". f_empresas: %d filas insertadas/actualizadas.", n))
   })
 }

@@ -3,6 +3,7 @@
 #' @param db_name Nombre de la base de datos a conectar (opcional)
 #' @param env_path Ruta al archivo .env (por defecto usa here::here())
 #' @return Objeto de conexión DBI
+#' @export
 establecer_conexion <- function(
     db_name = Sys.getenv("PGDATABASE"),
     env_path = NULL

@@ -7,18 +7,18 @@
 procesar_archivos_sii(files, con, hdr_map = NULL)
 }
 \arguments{
-\item{files}{\code{character}. Rutas a los TXT válidos.}
+\item{files}{\code{character}. Rutas a los TXT validos.}
 
-\item{con}{Conexión DBI.}
+\item{con}{Conexion DBI.}
 
 \item{hdr_map}{\code{data.table} opcional devuelto por
 \code{\link{detectar_claves_sii}}.  Si se suministra, las columnas
-se renombrarán dinámicamente.}
+se renombraran dinamicamente.}
 }
 \value{
 Invisiblemente \code{list(procesados, omitidos)}.
 }
 \description{
-Lee cada fichero, renombra columnas según un mapeo opcional \code{hdr_map},
-verifica que contenga las claves mínimas y actualiza el DW.
+Lee cada fichero, renombra columnas segun un mapeo opcional \code{hdr_map},
+verifica que contenga las claves minimas y actualiza el DW.
 }

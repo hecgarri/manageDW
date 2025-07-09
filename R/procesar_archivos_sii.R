@@ -1,13 +1,13 @@
 #' Procesa masivamente archivos TXT del SII
 #'
-#' Lee cada fichero, renombra columnas según un mapeo opcional `hdr_map`,
-#' verifica que contenga las claves mínimas y actualiza el DW.
+#' Lee cada fichero, renombra columnas segun un mapeo opcional `hdr_map`,
+#' verifica que contenga las claves minimas y actualiza el DW.
 #'
-#' @param files `character`. Rutas a los TXT válidos.
-#' @param con   Conexión DBI.
+#' @param files `character`. Rutas a los TXT validos.
+#' @param con   Conexion DBI.
 #' @param hdr_map `data.table` opcional devuelto por
 #'        \code{\link{detectar_claves_sii}}.  Si se suministra, las columnas
-#'        se renombrarán dinámicamente.
+#'        se renombraran dinamicamente.
 #'
 #' @return Invisiblemente `list(procesados, omitidos)`.
 #' @export
@@ -31,23 +31,23 @@ procesar_archivos_sii <- function(files, con, hdr_map = NULL) {
   for (f in files) {
     fname <- basename(f)
 
-    ## --- lectura con renombrado dinámico ----------------------------------
+    ## --- lectura con renombrado dinamico ----------------------------------
     dt <- if (is.null(hdr_map)) {
       leer_txt_sii(f)
     } else {
       leer_txt_sii(f, hdr_map = hdr_map)
     }
 
-    ## Filtro de año --------------------------------------------------------
+    ## Filtro de ano --------------------------------------------------------
     if (!tiene_anio(dt, fname)) {
-      msg <- sprintf("» Omitido %s — sin indicador de año.", fname)
+      msg <- sprintf("> Omitido %s - sin indicador de ano.", fname)
       message(msg); omitidos <- c(omitidos, msg); next
     }
 
-    ## Filtro de métricas mínimas ------------------------------------------
+    ## Filtro de metricas minimas ------------------------------------------
     if (!all(cols_metric %in% names(dt))) {
       falt <- cols_metric[!cols_metric %in% names(dt)]
-      msg  <- sprintf("» Omitido %s — faltan métricas: %s.",
+      msg  <- sprintf("> Omitido %s - faltan metricas: %s.",
                       fname, paste(falt, collapse = ", "))
       message(msg); omitidos <- c(omitidos, msg); next
     }
@@ -56,7 +56,7 @@ procesar_archivos_sii <- function(files, con, hdr_map = NULL) {
     cargar_dimensiones(dt, con, file_name = fname)
     cargar_hechos_empresas(dt, con)
 
-    message(sprintf("✓ Procesado %s — cargado al DW.", fname))
+    message(sprintf("? Procesado %s - cargado al DW.", fname))
     procesados <- c(procesados, fname)
   }
 

@@ -1,7 +1,7 @@
 #' Selecciona los archivos que contienen todas las dimensiones requeridas
 #'
 #' Utiliza la salida de \code{\link{detectar_claves_sii}} para decidir
-#' qué archivos disponen de la información mínima necesaria.
+#' que archivos disponen de la informacion minima necesaria.
 #'
 #' @param mapping `data.table` devuelto por \code{detectar_claves_sii()}.
 #' @param dims `character`. Dimensiones obligatorias, por defecto
@@ -32,10 +32,10 @@ filtrar_archivos_dim <- function(mapping, dims = c("geo", "act", "time", "metric
   ok  <- resumen[cumple == TRUE, file]
   bad <- resumen[cumple == FALSE, file]
 
-  message("\n--- Resumen selección de archivos ---")
-  if (length(ok))  message("✓ Con dimensiones requeridas: ",
+  message("\n--- Resumen seleccion de archivos ---")
+  if (length(ok))  message("? Con dimensiones requeridas: ",
                            toString(ok))
-  if (length(bad)) message("» Incompletos: ",
+  if (length(bad)) message("> Incompletos: ",
                            toString(bad))
   message("--------------------------------------\n")
 

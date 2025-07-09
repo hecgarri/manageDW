@@ -18,7 +18,7 @@ archivos que cumplen los requisitos.
 }
 \description{
 Utiliza la salida de \code{\link{detectar_claves_sii}} para decidir
-qué archivos disponen de la información mínima necesaria.
+que archivos disponen de la informacion minima necesaria.
 }
 \examples{
 \dontrun{

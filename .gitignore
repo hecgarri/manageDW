@@ -1,1 +1,14 @@
-.Rproj.user
+# Proyecto R
+.Rproj.user/
+
+# Archivos de texto y ZIP
+*.txt
+*.zip
+
+# Otros que conviene ignorar en paquetes R
+.Rhistory
+.RData
+.Ruserdata
+.Rbuildignore
+*.tar.gz
+.env

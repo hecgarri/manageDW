@@ -2,6 +2,8 @@
 #' Crear base de datos si no existe (usando .env)
 #'
 #' @param nombre_bd Nombre de la base de datos a crear
+#' @param env_path ruta al archivo .env
+#' @export
 crear_base_si_no_existe <- function(nombre_bd, env_path = NULL) {
   library(DBI)
   library(RPostgres)
@@ -37,7 +39,7 @@ crear_base_si_no_existe <- function(nombre_bd, env_path = NULL) {
     dbExecute(con_admin, glue("CREATE DATABASE {nombre_bd};"))
     message(glue("Base de datos '{nombre_bd}' creada."))
   } else {
-    message(glue("️ La base de datos '{nombre_bd}' ya existe."))
+    message(glue("? La base de datos '{nombre_bd}' ya existe."))
   }
 
   dbDisconnect(con_admin)
